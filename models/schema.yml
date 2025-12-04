@@ -23,6 +23,13 @@ sources:
             description: the amount paid by the customer to purchase the product. revenue = quantity * selling price
           - name: quantity
             description: the quantity of products purchased for a given order
+        tests:
+          - unique:
+              column_name: "(order_id || '-' || pdt_id)"
+          - dbt_utils.unique_combination_of_columns:
+              combination_of_columns:
+                  - order_id
+                  - pdt_id
       - name: product
         identifier: raw_gz_product
         description: products of Greenweez
